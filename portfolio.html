@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prostil Mangasule | Web Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================== RESET & BASE ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:       #6C3CE0;
+      --primary-dark:  #5B21B6;
+      --primary-light: #8B5CF6;
+      --p10: rgba(108,60,224,.10);
+      --p20: rgba(108,60,224,.20);
+      --p25: rgba(108,60,224,.25);
+      --p5:  rgba(108,60,224,.05);
+      --g50:  #f9fafb;
+      --g100: #f3f4f6;
+      --g200: #e5e7eb;
+      --g300: #d1d5db;
+      --g400: #9ca3af;
+      --g500: #6b7280;
+      --g600: #4b5563;
+      --g700: #374151;
+      --g800: #1f2937;
+      --g900: #111827;
+      --font: 'Inter', system-ui, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+      --radius: 1rem;
+      --radius-lg: 1.25rem;
+      --radius-full: 9999px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--g900); background: #fff; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===================== SCROLLBAR ===================== */
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: var(--g100); }
+    ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+    /* ===================== LAYOUT ===================== */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+    section { padding: 5.5rem 0; }
+
+    /* ===================== SCROLL REVEAL ===================== */
+    .reveal, .reveal-l, .reveal-r {
+      opacity: 0;
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal     { transform: translateY(28px); }
+    .reveal-l   { transform: translateX(-28px); }
+    .reveal-r   { transform: translateX(28px); }
+    .reveal.in, .reveal-l.in, .reveal-r.in {
+      opacity: 1;
+      transform: translate(0);
+    }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+    .d3 { transition-delay: .24s; }
+    .d4 { transition-delay: .32s; }
+    .d5 { transition-delay: .40s; }
+    .d6 { transition-delay: .48s; }
+
+    /* ===================== KEYFRAMES ===================== */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* ===================== TOP BAR ===================== */
+    .topbar {
+      background: var(--g900);
+      color: var(--g400);
+      font-size: .72rem;
+      letter-spacing: .01em;
+      padding: .45rem 0;
+    }
+    .topbar .container { display:flex; justify-content:space-between; align-items:center; }
+    .topbar-left { display:flex; gap:1.5rem; }
+    .topbar a, .topbar-right { display:flex; align-items:center; gap:.4rem; color:var(--g400); transition:color .2s; }
+    .topbar a:hover { color:#fff; }
+
+    /* ===================== NAVBAR ===================== */
+    .navbar {
+      position: sticky; top: 0; z-index: 999;
+      background: #fff;
+      border-bottom: 1px solid transparent;
+      transition: all .3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--g100);
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    }
+    .navbar .container { display:flex; align-items:center; justify-content:space-between; height:4rem; }
+    .logo { font-size:1.2rem; font-weight:800; color:var(--g900); letter-spacing:-.03em; }
+    .logo span { color:var(--primary); }
+    .nav-links { display:flex; align-items:center; gap:2rem; }
+    .nav-links a {
+      font-size:.85rem; font-weight:500; color:var(--g600);
+      transition:color .2s; position:relative; padding-bottom:2px;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-2px; left:0;
+      width:0; height:2px; background:var(--primary); transition:width .25s;
+    }
+    .nav-links a:hover { color:var(--primary); }
+    .nav-links a:hover::after { width:100%; }
+    .btn-cta {
+      padding:.5rem 1.3rem;
+      background:var(--primary); color:#fff;
+      font-size:.85rem; font-weight:600;
+      border-radius:var(--radius-full);
+      border:none; cursor:pointer;
+      transition:all .25s; display:inline-block;
+    }
+    .btn-cta:hover {
+      background:var(--primary-dark);
+      box-shadow:0 8px 22px var(--p25);
+      transform:translateY(-1px);
+    }
+    .hamburger {
+      display:none; background:none; border:none; cursor:pointer;
+      color:var(--g700); padding:4px; transition:color .2s;
+    }
+    .hamburger:hover { color:var(--primary); }
+    .mobile-nav {
+      display:none; flex-direction:column; gap:.5rem;
+      background:#fff; border-top:1px solid var(--g100);
+      padding:1rem 1.25rem;
+    }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a {
+      font-size:.9rem; font-weight:500; color:var(--g600);
+      padding:.5rem 0; transition:color .2s; border-bottom:1px solid var(--g100);
+    }
+    .mobile-nav a:last-child { border-bottom:none; }
+    .mobile-nav a:hover { color:var(--primary); }
+    .mobile-nav .btn-cta { text-align:center; margin-top:.5rem; }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      background: linear-gradient(135deg,#f9fafb 0%,#fff 55%,rgba(237,233,254,.35) 100%);
+      position:relative; overflow:hidden;
+    }
+    .hero-blob-1 {
+      position:absolute; top:4rem; right:3rem;
+      width:20rem; height:20rem;
+      background:rgba(108,60,224,.05); border-radius:50%; filter:blur(3rem);
+      pointer-events:none;
+    }
+    .hero-blob-2 {
+      position:absolute; bottom:3rem; left:2rem;
+      width:14rem; height:14rem;
+      background:rgba(196,181,253,.18); border-radius:50%; filter:blur(2rem);
+      pointer-events:none;
+    }
+    .hero .container { padding-top:5rem; padding-bottom:5rem; }
+    .hero-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;
+    }
+    .hero-badge {
+      font-size:.68rem; font-weight:700; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--primary); margin-bottom:1rem;
+      display:inline-flex; align-items:center; gap:.5rem;
+    }
+    .hero-badge::before {
+      content:''; width:20px; height:2px; background:var(--primary); border-radius:2px;
+    }
+    .hero h1 {
+      font-size:clamp(2.2rem,4.2vw,3.5rem); font-weight:800;
+      line-height:1.13; color:var(--g900); margin-bottom:1.4rem;
+    }
+    .hero h1 em {
+      font-style:italic; color:var(--primary);
+      font-family:var(--serif); font-weight:700;
+    }
+    .hero-desc {
+      color:var(--g500); font-size:.95rem; line-height:1.75;
+      margin-bottom:2rem; max-width:27rem;
+    }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1.75rem;
+      background:var(--primary); color:#fff;
+      font-weight:600; font-size:.95rem;
+      border-radius:var(--radius-full); border:none; cursor:pointer;
+      transition:all .25s;
+    }
+    .btn-primary:hover {
+      background:var(--primary-dark);
+      box-shadow:0 12px 28px var(--p25);
+      transform:translateY(-2px);
+    }
+    .btn-primary svg { transition:transform .2s; }
+    .btn-primary:hover svg { transform:translateY(2px); }
+    .btn-outline {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1.75rem;
+      border:2px solid var(--g200); color:var(--g700);
+      font-weight:600; font-size:.95rem;
+      border-radius:var(--radius-full);
+      transition:all .25s;
+    }
+    .btn-outline:hover { border-color:var(--primary); color:var(--primary); }
+
+    /* Avatar */
+    .hero-avatar-wrap { display:flex; justify-content:center; }
+    .hero-avatar-inner { position:relative; }
+    .hero-avatar {
+      width:17rem; height:19rem;
+      background:linear-gradient(145deg,#eee,#ddd);
+      border-radius:1.5rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 28px 56px rgba(0,0,0,.12), 0 8px 20px rgba(108,60,224,.12);
+      animation:float 3.2s ease-in-out infinite;
+      position:relative; overflow:hidden;
+    }
+    .hero-avatar::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(108,60,224,.08),transparent 60%);
+    }
+    .hero-avatar span {
+      font-family:var(--serif); font-size:6rem; font-weight:800;
+      color:rgba(108,60,224,.75); user-select:none; position:relative; z-index:1;
+    }
+    .dots-grid {
+      position:absolute; bottom:-1rem; right:-1rem;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:.38rem; opacity:.25;
+    }
+    .dot { width:.38rem; height:.38rem; background:var(--primary); border-radius:50%; }
+    .deco-ring {
+      position:absolute; top:-1rem; left:-1rem;
+      width:2.75rem; height:2.75rem;
+      border:2px solid rgba(108,60,224,.2); border-radius:50%;
+    }
+    .deco-ring-2 {
+      position:absolute; bottom:3rem; right:-1.5rem;
+      width:1.25rem; height:1.25rem;
+      border:2px solid rgba(108,60,224,.15); border-radius:50%;
+    }
+
+    /* Stats */
+    .stats-row {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:2rem; margin-top:5rem; padding-top:2.5rem;
+      border-top:1px solid var(--g200);
+    }
+    .stat-item .val {
+      font-size:1.8rem; font-weight:800; color:var(--g900); margin-bottom:.2rem;
+    }
+    .stat-item .lbl { font-size:.73rem; color:var(--g400); font-weight:500; }
+
+    /* ===================== SECTION COMMON ===================== */
+    .sec-tag {
+      font-size:.68rem; font-weight:700; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--primary); margin-bottom:.75rem;
+      display:inline-flex; align-items:center; gap:.5rem;
+    }
+    .sec-tag::before { content:''; width:16px; height:2px; background:var(--primary); border-radius:2px; }
+    .sec-title {
+      font-family:var(--serif); font-size:clamp(1.7rem,3vw,2.4rem);
+      font-weight:700; color:var(--g900); margin-bottom:.75rem; line-height:1.2;
+    }
+    .sec-desc { font-size:.875rem; color:var(--g500); margin-bottom:3rem; }
+
+    /* ===================== ABOUT ===================== */
+    .about-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start;
+    }
+    .about-btns { display:flex; gap:.875rem; margin-top:2.25rem; flex-wrap:wrap; }
+    .btn-soft {
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.6rem 1.2rem;
+      border:1.5px solid var(--g200); color:var(--g700);
+      font-size:.85rem; font-weight:500;
+      border-radius:var(--radius-full); transition:all .2s;
+    }
+    .btn-soft:hover { border-color:var(--primary); color:var(--primary); box-shadow:0 4px 14px var(--p10); }
+    .about-text p {
+      color:var(--g500); font-size:.9375rem; line-height:1.8; margin-bottom:1.1rem;
+    }
+    .about-text p:last-child { margin-bottom:0; }
+
+    /* ===================== SKILLS ===================== */
+    .bg-alt { background:var(--g50); }
+    .skills-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem;
+    }
+    .skill-card {
+      background:#fff; border-radius:var(--radius-lg); padding:1.5rem;
+      border:1.5px solid var(--g100);
+      transition:all .3s;
+    }
+    .skill-card:hover {
+      border-color:var(--p20);
+      box-shadow:0 14px 36px var(--p5);
+      transform:translateY(-3px);
+    }
+    .skill-card.wide { grid-column:span 2; }
+    .skill-card h3 {
+      font-size:.85rem; font-weight:600; color:var(--g900);
+      margin-bottom:1rem; transition:color .2s;
+    }
+    .skill-card:hover h3 { color:var(--primary); }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+    .tag {
+      padding:.35rem .75rem;
+      background:var(--g50); color:var(--g600);
+      font-size:.73rem; font-weight:500;
+      border-radius:.55rem; border:1px solid var(--g100);
+      transition:all .2s; cursor:default;
+    }
+    .tag:hover { background:var(--p5); color:var(--primary); border-color:var(--p20); }
+
+    /* ===================== EXPERIENCE ===================== */
+    .exp-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:2rem;
+    }
+    .exp-card {
+      background:linear-gradient(135deg,var(--g50) 0%,#fff 100%);
+      border-radius:var(--radius-lg); padding:2rem;
+      border:1.5px solid var(--g100);
+      transition:border-color .3s, box-shadow .3s;
+    }
+    .exp-card:hover { border-color:var(--p20); box-shadow:0 12px 32px var(--p5); }
+    .card-header { display:flex; align-items:flex-start; gap:.9rem; margin-bottom:1.4rem; }
+    .icon-box {
+      width:2.75rem; height:2.75rem; border-radius:.875rem;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .ic-purple { background:var(--p10); color:var(--primary); }
+    .ic-blue   { background:rgba(59,130,246,.1); color:#3b82f6; }
+    .ic-amber  { background:rgba(245,158,11,.1); color:#f59e0b; }
+    .card-header h3 { font-size:1rem; font-weight:700; color:var(--g900); margin-bottom:.2rem; }
+    .card-header p  { font-size:.73rem; color:var(--g400); }
+    .exp-list { display:flex; flex-direction:column; gap:.75rem; }
+    .exp-list li { display:flex; gap:.6rem; font-size:.87rem; color:var(--g500); line-height:1.65; }
+    .bullet { color:var(--primary); flex-shrink:0; margin-top:.38rem; font-size:.65rem; }
+    .edu-stack { display:flex; flex-direction:column; gap:1.1rem; }
+    .hr { border:none; border-top:1px solid var(--g100); margin:1rem 0; }
+    .edu-item h4 { font-size:.95rem; font-weight:700; color:var(--g900); margin-bottom:.25rem; }
+    .edu-item p  { font-size:.73rem; color:var(--g400); }
+    .cert-card {
+      background:linear-gradient(135deg,rgba(237,233,254,.4) 0%,#fff 100%);
+      border-radius:var(--radius-lg); padding:2rem;
+      border:1.5px solid rgba(221,214,254,.6);
+    }
+    .cert-item { margin-bottom:.9rem; }
+    .cert-item:last-child { margin-bottom:0; }
+    .cert-item h4 { font-size:.87rem; font-weight:600; color:var(--g800); margin-bottom:.2rem; }
+    .cert-item h4.highlight { color:var(--primary); text-decoration:underline; text-decoration-color:var(--p25); }
+    .cert-item p { font-size:.73rem; color:var(--g400); }
+
+    /* ===================== PROJECTS ===================== */
+    .projects-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem;
+    }
+    .project-card {
+      background:#fff; border-radius:var(--radius-lg); padding:1.5rem;
+      border:1.5px solid var(--g100); display:block;
+      transition:all .3s;
+    }
+    .project-card:hover {
+      border-color:var(--p20);
+      box-shadow:0 18px 44px rgba(108,60,224,.08);
+      transform:translateY(-4px);
+    }
+    .p-icon {
+      width:3rem; height:3rem; border-radius:.875rem;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:700; font-size:.85rem;
+      margin-bottom:1rem;
+      box-shadow:0 6px 16px rgba(0,0,0,.14);
+      transition:transform .25s;
+    }
+    .project-card:hover .p-icon { transform:scale(1.12) rotate(-2deg); }
+    .p-name { font-weight:600; color:var(--g900); font-size:.95rem; margin-bottom:.25rem; transition:color .2s; }
+    .project-card:hover .p-name { color:var(--primary); }
+    .p-cat { font-size:.73rem; color:var(--g400); margin-bottom:1rem; }
+    .p-link { display:inline-flex; align-items:center; gap:.38rem; font-size:.73rem; font-weight:500; color:var(--primary); transition:gap .2s; }
+    .project-card:hover .p-link { gap:.65rem; }
+
+    /* Icon colors */
+    .c-red    { background:#ef4444; }
+    .c-orange { background:#f97316; }
+    .c-indigo { background:#6366f1; }
+    .c-teal   { background:#14b8a6; }
+    .c-purple { background:#a855f7; }
+    .c-emerald{ background:#10b981; }
+    .c-amber  { background:#f59e0b; }
+    .c-pink   { background:#ec4899; }
+    .c-cyan   { background:#06b6d4; }
+
+    /* ===================== CONTACT ===================== */
+    .contact-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem;
+    }
+    .contact-card {
+      background:var(--g50); border-radius:var(--radius-lg); padding:1.75rem;
+      border:1.5px solid var(--g100); display:block;
+      transition:all .3s;
+    }
+    .contact-card:hover {
+      background:#fff; border-color:var(--p20);
+      box-shadow:0 14px 36px var(--p5); transform:translateY(-3px);
+    }
+    .c-icon {
+      width:3rem; height:3rem; border-radius:.875rem;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1rem; transition:transform .25s;
+    }
+    .contact-card:hover .c-icon { transform:scale(1.12); }
+    .ci-purple { background:var(--p10); color:var(--primary); }
+    .ci-blue   { background:rgba(59,130,246,.1); color:#3b82f6; }
+    .ci-green  { background:rgba(16,185,129,.1); color:#10b981; }
+    .c-title { font-weight:600; color:var(--g900); font-size:.87rem; margin-bottom:.25rem; }
+    .c-val { font-size:.82rem; color:var(--g500); transition:color .2s; }
+    .contact-card:hover .c-val { color:var(--primary); }
+
+    /* ===================== FOOTER ===================== */
+    footer { background:var(--g900); color:var(--g300); }
+    .footer-main {
+      display:grid; grid-template-columns:1.6fr 1fr 1fr;
+      gap:3rem; padding:4.5rem 0 3rem;
+    }
+    .footer-logo { font-size:1.2rem; font-weight:800; color:#fff; letter-spacing:-.03em; display:inline-block; margin-bottom:1rem; }
+    .footer-logo span { color:var(--primary-light); }
+    .footer-tagline { font-size:.875rem; color:var(--g400); line-height:1.7; max-width:17rem; }
+    .footer-col h4 { font-weight:600; color:#fff; font-size:.875rem; margin-bottom:1.25rem; }
+    .footer-links { display:flex; flex-direction:column; gap:.65rem; }
+    .footer-links a { font-size:.875rem; color:var(--g400); transition:all .2s; display:inline-block; }
+    .footer-links a:hover { color:var(--primary-light); transform:translateX(4px); }
+    .footer-contact { display:flex; flex-direction:column; gap:.85rem; }
+    .footer-contact li { display:flex; align-items:center; gap:.625rem; font-size:.875rem; color:var(--g400); }
+    .footer-contact a { color:var(--g400); transition:color .2s; }
+    .footer-contact a:hover { color:var(--primary-light); }
+    .footer-bottom {
+      border-top:1px solid var(--g800);
+      padding:1.4rem 0; text-align:center;
+      font-size:.73rem; color:var(--g500);
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width:1024px) {
+      .skills-grid { grid-template-columns:repeat(2,1fr); }
+      .skill-card.wide { grid-column:span 1; }
+    }
+    @media (max-width:768px) {
+      .topbar-right { display:none; }
+      .nav-links, .navbar > .container > .btn-cta { display:none; }
+      .hamburger { display:block; }
+      .hero-grid { grid-template-columns:1fr; text-align:center; }
+      .hero-avatar-wrap { order:-1; }
+      .hero-btns { justify-content:center; }
+      .hero-desc { margin:0 auto 2rem; }
+      .hero-badge { justify-content:center; }
+      .stats-row { grid-template-columns:repeat(2,1fr); text-align:center; }
+      .about-grid { grid-template-columns:1fr; gap:2rem; }
+      .about-btns { justify-content:center; }
+      section.about .reveal-l, section.about .reveal-r { text-align:center; }
+      .skills-grid { grid-template-columns:1fr; }
+      .skill-card.wide { grid-column:span 1; }
+      .exp-grid { grid-template-columns:1fr; }
+      .projects-grid { grid-template-columns:repeat(2,1fr); }
+      .contact-grid { grid-template-columns:1fr; }
+      .footer-main { grid-template-columns:1fr; gap:2rem; }
+    }
+    @media (max-width:480px) {
+      .projects-grid { grid-template-columns:1fr; }
+      .topbar-left { gap:.75rem; }
+      .hero-avatar { width:13rem; height:15rem; }
+      .hero-avatar span { font-size:4.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =================== TOP BAR =================== -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:prostilmangasule@gmail.com">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        prostilmangasule@gmail.com
+      </a>
+      <a href="tel:+917619667850">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 76196 67850
+      </a>
+    </div>
+    <div class="topbar-right" style="display:flex;align-items:center;gap:.4rem;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Chikodi, Belagavi, Karnataka
+    </div>
+  </div>
+</div>
+
+<!-- =================== NAVBAR =================== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="logo">Prostil<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#banner">Banner</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-cta">Contact Me</a>
+    <button class="hamburger" id="burger" aria-label="Menu">
+      <svg id="ico-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <svg id="ico-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#banner"     class="mob-link">Banner</a>
+    <a href="#about"      class="mob-link">About</a>
+    <a href="#skills"     class="mob-link">Skills</a>
+    <a href="#experience" class="mob-link">Experience</a>
+    <a href="#projects"   class="mob-link">Projects</a>
+    <a href="#contact"    class="mob-link">Contact</a>
+    <a href="#contact"    class="btn-cta mob-link">Contact Me</a>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section class="hero" id="banner">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left content -->
+      <div class="reveal">
+        <p class="hero-badge">Open to full-time opportunities</p>
+        <h1>Web <em>Developer</em><br>building fast,<br>secure websites.</h1>
+        <p class="hero-desc">2 years of experience building responsive websites and WooCommerce stores for real clients. I'm looking for a full-time role where I can keep growing as a web developer.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">
+            View my work
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </a>
+          <a href="#contact" class="btn-outline">Contact me</a>
+        </div>
+      </div>
+
+      <!-- Right avatar -->
+      <div class="hero-avatar-wrap reveal d3">
+        <div class="hero-avatar-inner">
+          <div class="hero-avatar"><span>PM</span></div>
+          <div class="dots-grid">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <div class="deco-ring"></div>
+          <div class="deco-ring-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row reveal d2">
+      <div class="stat-item"><div class="val">2 YRS</div><div class="lbl">Professional experience</div></div>
+      <div class="stat-item"><div class="val">20+</div><div class="lbl">Websites delivered</div></div>
+      <div class="stat-item"><div class="val">6</div><div class="lbl">Builders & CMS platforms</div></div>
+      <div class="stat-item"><div class="val">4</div><div class="lbl">Languages spoken</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ABOUT =================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-l">
+        <p class="sec-tag">About Me</p>
+        <h2 class="sec-title">Hello, my name is Prostil Mangasule. Welcome to my portfolio.</h2>
+        <div class="about-btns">
+          <a href="mailto:prostilmangasule@gmail.com" class="btn-soft">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+          <a href="tel:+917619667850" class="btn-soft">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>
+        </div>
+      </div>
+      <div class="about-text reveal-r">
+        <p>I'm a web developer with 2 years of experience in responsive design, WooCommerce integration and front-end development. I've created 20+ high-performance websites with improved speed, security and UX.</p>
+        <p>I work comfortably with Elementor, WPBakery, Divi, WIX and Webflow, and I have a strong understanding of cPanel, SEO best practices and cross-browser compatibility.</p>
+        <p>I work directly with clients to gather requirements and deliver tailored web solutions. I speak English, Kannada, Hindi and Marathi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SKILLS =================== -->
+<section id="skills" class="bg-alt">
+  <div class="container">
+    <div class="reveal">
+      <p class="sec-tag">Expertise</p>
+      <h2 class="sec-title">My Skills</h2>
+      <p class="sec-desc">The tools I use to take a site from brief to launch.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal d1">
+        <h3>Web technologies</h3>
+        <div class="skill-tags">
+          <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d2">
+        <h3>Front-end</h3>
+        <div class="skill-tags">
+          <span class="tag">Bootstrap</span><span class="tag">React.js (basic)</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d3">
+        <h3>CMS & builders</h3>
+        <div class="skill-tags">
+          <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">WPBakery</span>
+          <span class="tag">Divi</span><span class="tag">WIX</span><span class="tag">Webflow</span>
+          <span class="tag">WooCommerce</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d4">
+        <h3>Tools</h3>
+        <div class="skill-tags">
+          <span class="tag">Git</span><span class="tag">VS Code</span><span class="tag">XAMPP</span><span class="tag">cPanel</span>
+        </div>
+      </div>
+      <div class="skill-card wide reveal d5">
+        <h3>Other</h3>
+        <div class="skill-tags">
+          <span class="tag">Responsive design</span><span class="tag">SEO</span><span class="tag">Cross-browser</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== EXPERIENCE =================== -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <p class="sec-tag">Career</p>
+      <h2 class="sec-title">Experience & Education</h2>
+    </div>
+    <div class="exp-grid" style="margin-top:2.5rem;">
+
+      <!-- Work -->
+      <div class="exp-card reveal-l">
+        <div class="card-header">
+          <div class="icon-box ic-purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div>
+            <h3>Senior Developer</h3>
+            <p>Webstar Technologies Pvt.Ltd, Kolhapur · 2024 – Present</p>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li><span class="bullet">▸</span><span>Built responsive, interactive sites with HTML5, CSS3, JavaScript and WordPress.</span></li>
+          <li><span class="bullet">▸</span><span>Customised themes using Elementor, WPBakery and Divi.</span></li>
+          <li><span class="bullet">▸</span><span>Collaborated with back-end developers on CMS features.</span></li>
+          <li><span class="bullet">▸</span><span>Improved performance, security and mobile UX across 20+ projects.</span></li>
+          <li><span class="bullet">▸</span><span>Configured WooCommerce for client e-commerce.</span></li>
+          <li><span class="bullet">▸</span><span>Managed cPanel deployments, maintenance and backups.</span></li>
+          <li><span class="bullet">▸</span><span>Gathered requirements directly with clients.</span></li>
+        </ul>
+      </div>
+
+      <!-- Education + Certs -->
+      <div class="edu-stack">
+        <div class="exp-card reveal-r">
+          <div class="card-header" style="margin-bottom:1rem;">
+            <div class="icon-box ic-blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-9.5-5.5L3 10"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/><path d="M22 10v6"/></svg>
+            </div>
+            <div>
+              <h3>Bachelor of Computer Science</h3>
+              <p>Jain College of Engineering, Belagavi · 2019 – 2023</p>
+            </div>
+          </div>
+          <hr class="hr">
+          <div class="edu-item">
+            <h4>Pre-University</h4>
+            <p>Aradhana Science PU College, Dharwad · 2017 – 2019</p>
+          </div>
+        </div>
+        <div class="cert-card reveal-r d2">
+          <div class="card-header" style="margin-bottom:1rem;">
+            <div class="icon-box ic-amber">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div><h3>Certifications</h3></div>
+          </div>
+          <div class="cert-item">
+            <h4>Full stack development course</h4>
+            <p>Vip Academy, Bengaluru · Jan 2024</p>
+          </div>
+          <div class="cert-item">
+            <h4 class="highlight">Web application development</h4>
+            <p>Feb 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PROJECTS =================== -->
+<section id="projects" class="bg-alt">
+  <div class="container">
+    <div class="reveal">
+      <p class="sec-tag">Portfolio</p>
+      <h2 class="sec-title">My Projects</h2>
+      <p class="sec-desc">A selection of live websites I've worked on. Click any card to visit the site.</p>
+    </div>
+    <div class="projects-grid">
+
+      <a href="#" class="project-card reveal d1">
+        <div class="p-icon c-red">Ie</div>
+        <p class="p-name">Immerse Education</p>
+        <p class="p-cat">Education · Academic programmes</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d2">
+        <div class="p-icon c-orange">Te</div>
+        <p class="p-name">TED × Immerse</p>
+        <p class="p-cat">Education · Programme microsite</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d3">
+        <div class="p-icon c-indigo">NL</div>
+        <p class="p-name">No Limits RE</p>
+        <p class="p-cat">Business website</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d1">
+        <div class="p-icon c-teal">Sp</div>
+        <p class="p-name">Schulze Physio</p>
+        <p class="p-cat">Healthcare · Physiotherapy</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d2">
+        <div class="p-icon c-purple">Br</div>
+        <p class="p-name">Brio Fürth</p>
+        <p class="p-cat">Local business website</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d3">
+        <div class="p-icon c-emerald">Gh</div>
+        <p class="p-name">Garanta Hof</p>
+        <p class="p-cat">Business website</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d1">
+        <div class="p-icon c-amber">Gg</div>
+        <p class="p-name">Greeko Gyros Food</p>
+        <p class="p-cat">Restaurant · United Kingdom</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d2">
+        <div class="p-icon c-pink">Pu</div>
+        <p class="p-name">Purely GmbH</p>
+        <p class="p-cat">Company website</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+      <a href="#" class="project-card reveal d3">
+        <div class="p-icon c-cyan">Eh</div>
+        <p class="p-name">Endo Health Clinic</p>
+        <p class="p-cat">Healthcare · Clinic</p>
+        <span class="p-link">Visit website <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== CONTACT =================== -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <p class="sec-tag">Get in Touch</p>
+      <h2 class="sec-title">Contact</h2>
+      <p class="sec-desc">Feel free to reach out by email or phone.</p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:prostilmangasule@gmail.com" class="contact-card reveal d1">
+        <div class="c-icon ci-purple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <p class="c-title">Email</p>
+        <p class="c-val">prostilmangasule@gmail.com</p>
+      </a>
+      <a href="tel:+917619667850" class="contact-card reveal d2">
+        <div class="c-icon ci-blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <p class="c-title">Phone</p>
+        <p class="c-val">+91 76196 67850</p>
+      </a>
+      <a href="#" class="contact-card reveal d3">
+        <div class="c-icon ci-green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <p class="c-title">Location</p>
+        <p class="c-val">Chikodi, Belagavi, Karnataka</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div>
+        <a href="#" class="footer-logo">Prostil<span>.</span></a>
+        <p class="footer-tagline">Open to full-time web development roles. I'd love to hear from you.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <a href="mailto:prostilmangasule@gmail.com">prostilmangasule@gmail.com</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+917619667850">+91 76196 67850</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Chikodi, Belagavi, Karnataka</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© 2026 Prostil Mangasule. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- =================== JAVASCRIPT =================== -->
+<script>
+  /* ---- Navbar scroll effect ---- */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  /* ---- Mobile hamburger ---- */
+  const burger    = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const icoMenu   = document.getElementById('ico-menu');
+  const icoClose  = document.getElementById('ico-close');
+  let menuOpen = false;
+
+  burger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileNav.classList.toggle('open', menuOpen);
+    icoMenu.style.display  = menuOpen ? 'none'  : 'block';
+    icoClose.style.display = menuOpen ? 'block' : 'none';
+  });
+
+  document.querySelectorAll('.mob-link').forEach(el => {
+    el.addEventListener('click', () => {
+      menuOpen = false;
+      mobileNav.classList.remove('open');
+      icoMenu.style.display  = 'block';
+      icoClose.style.display = 'none';
+    });
+  });
+
+  /* ---- Scroll reveal (IntersectionObserver) ---- */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => io.observe(el));
+
+  /* ---- Active nav link highlight on scroll ---- */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.style.color = 'var(--primary)';
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => navIO.observe(s));
+</script>
+</body>
+</html>
