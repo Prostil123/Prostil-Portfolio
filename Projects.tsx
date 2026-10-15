@@ -2,15 +2,15 @@ import { ExternalLink } from 'lucide-react';
 import { useInView } from './useInView';
 
 const projects = [
-  { initials: 'Ie', name: 'Immerse Education', category: 'Education · Academic programmes', color: 'bg-red-500' },
-  { initials: 'Te', name: 'TED × Immerse', category: 'Education · Programme microsite', color: 'bg-orange-500' },
-  { initials: 'NL', name: 'No Limits RE', category: 'Business website', color: 'bg-indigo-500' },
-  { initials: 'Sp', name: 'Schulze Physio', category: 'Healthcare · Physiotherapy', color: 'bg-teal-500' },
-  { initials: 'Br', name: 'Brio Fürth', category: 'Local business website', color: 'bg-purple-500' },
-  { initials: 'Gh', name: 'Garanta Hof', category: 'Business website', color: 'bg-emerald-500' },
-  { initials: 'Gg', name: 'Greeko Gyros Food', category: 'Restaurant · United Kingdom', color: 'bg-amber-500' },
-  { initials: 'Pu', name: 'Purely GmbH', category: 'Company website', color: 'bg-pink-500' },
-  { initials: 'Eh', name: 'Endo Health Clinic', category: 'Healthcare · Clinic', color: 'bg-cyan-500' },
+  { initials: 'Ie', name: 'Immerse Education', category: 'Education · Academic programmes', url: 'https://www.immerse.education/', color: 'bg-red-500' },
+  { initials: 'Te', name: 'TED × Immerse', category: 'Education · Programme microsite', url: 'https://www.ted.immerse.education/', color: 'bg-orange-500' },
+  { initials: 'NL', name: 'No Limits RE', category: 'Business website', url: 'https://nolimits-re.com/', color: 'bg-indigo-500' },
+  { initials: 'Sp', name: 'Schulze Physio', category: 'Healthcare · Physiotherapy', url: 'https://schulze.physio/', color: 'bg-teal-500' },
+  { initials: 'Br', name: 'Brio Fürth', category: 'Local business website', url: 'https://neu.brio-fuerth.de/', color: 'bg-purple-500' },
+  { initials: 'Gh', name: 'Garanta Hof', category: 'Business website', url: 'https://garanta-hof.de/', color: 'bg-emerald-500' },
+  { initials: 'Gg', name: 'Greeko Gyros Food', category: 'Restaurant · United Kingdom', url: 'https://greekogyrosfood.co.uk/', color: 'bg-amber-500' },
+  { initials: 'Pu', name: 'Purely GmbH', category: 'Company website', url: 'https://purely.gmbh/', color: 'bg-pink-500' },
+  { initials: 'Eh', name: 'Endo Health Clinic', category: 'Healthcare · Clinic', url: 'https://endohealthclinic.com/', color: 'bg-cyan-500' },
 ];
 
 export default function Projects() {
@@ -29,7 +29,9 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <a
               key={project.name}
-              href="#"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 ${
                 isInView ? 'animate-fade-in-up' : 'opacity-0'
               }`}
