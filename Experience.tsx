@@ -21,7 +21,7 @@ export default function Experience() {
               </div>
               <div>
                 <h3 className="font-bold text-gray-900 text-lg">Senior Developer</h3>
-                <p className="text-xs text-gray-400">Webstar Technologies Pvt.Ltd, Kolhapur · 2024 – Present</p>
+                <p className="text-xs text-gray-400">Walstar Technologies Pvt.Ltd, Kolhapur · 2024 – Present</p>
               </div>
             </div>
             <ul className="space-y-3 text-sm text-gray-500 leading-relaxed">
@@ -64,13 +64,16 @@ export default function Experience() {
                   <GraduationCap size={20} className="text-blue-500" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900">Bachelor of Computer Science</h3>
-                  <p className="text-xs text-gray-400">Jain College of Engineering, Belagavi · 2019 – 2023</p>
+                  <h3 className="font-bold text-gray-900">Education</h3>
                 </div>
               </div>
               <div className="mt-6 pt-4 border-t border-gray-100">
+                <h4 className="font-bold text-gray-900 mb-1">Bachelor of Computer Science</h4>
+                <p className="text-xs text-gray-400">Jain College of Engineering, Belagavi · 2019 – 2023</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-100">
                 <h4 className="font-bold text-gray-900 mb-1">Pre-University</h4>
-                <p className="text-xs text-gray-400">Aradhana Science PU College, Dharwad · 2017 – 2019</p>
+                <p className="text-xs text-gray-400">Aryabhata Science PU College, Dharwad · 2017 – 2019</p>
               </div>
             </div>
 
@@ -84,7 +87,7 @@ export default function Experience() {
               <div className="space-y-3">
                 <div>
                   <p className="font-semibold text-gray-800 text-sm">Full stack development course</p>
-                  <p className="text-xs text-gray-400">Vip Academy, Bengaluru · Jan 2024</p>
+                  <p className="text-xs text-gray-400">Tap Academy, Bengaluru · Jan 2024</p>
                 </div>
                 <div>
                   <p className="font-semibold text-primary text-sm underline decoration-primary/30">Web application development</p>
