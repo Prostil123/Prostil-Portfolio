@@ -60,7 +60,7 @@ export default function Hero() {
         <div className="mt-20 pt-10 border-t border-white/15">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '2 YRS', label: 'Professional experience' },
+              { value: '2 Years', label: 'Professional experience' },
               { value: '20+', label: 'Websites delivered' },
               { value: '6', label: 'Builders & CMS platforms' },
               { value: '4', label: 'Languages spoken' },
