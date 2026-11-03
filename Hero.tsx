@@ -11,9 +11,6 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="animate-fade-in-up">
-            <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-4">
-              Open to full-time opportunities
-            </p>
             <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-gray-900 leading-tight mb-6">
               Web{' '}
               <span className="font-serif italic text-primary">Developer</span>
