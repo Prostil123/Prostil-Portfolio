@@ -14,9 +14,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-gray-200/50' : 'bg-white'}`}>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md shadow-lg shadow-black/60' : 'bg-black'}`}>
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-        <a href="#" className="text-xl font-bold text-gray-900 tracking-tight">
+        <a href="#" className="text-xl font-bold text-white tracking-tight">
           Prostil<span className="text-primary">.</span>
         </a>
 
@@ -26,7 +26,7 @@ export default function Navbar() {
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              className="text-sm text-gray-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
+              className="text-sm text-gray-400 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
             >
               {link}
             </a>
@@ -42,7 +42,7 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+          className="md:hidden p-2 text-gray-300 hover:text-primary transition-colors"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -50,14 +50,14 @@ export default function Navbar() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 animate-fade-in">
+        <div className="md:hidden bg-black border-t border-white/10 animate-fade-in">
           <div className="px-4 py-4 flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm text-gray-600 hover:text-primary font-medium py-2 transition-colors"
+                className="text-sm text-gray-400 hover:text-primary font-medium py-2 transition-colors"
               >
                 {link}
               </a>

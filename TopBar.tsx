@@ -2,7 +2,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function TopBar() {
   return (
-    <div className="bg-gray-900 text-gray-300 text-xs py-2">
+    <div className="bg-zinc-950 text-gray-300 text-xs py-2 border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
           <a href="mailto:prostilmangasule@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">

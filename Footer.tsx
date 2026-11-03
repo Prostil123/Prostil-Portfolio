@@ -4,7 +4,7 @@ const quickLinks = ['About', 'Skills', 'Experience', 'Projects', 'Contact'];
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-zinc-950 text-gray-300 border-t border-white/10">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
@@ -62,7 +62,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-4 py-5 text-center">
           <p className="text-xs text-gray-500">
             © 2026 Prostil Mangasule. All rights reserved.
